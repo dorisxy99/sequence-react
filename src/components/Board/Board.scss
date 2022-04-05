@@ -1,0 +1,11 @@
+.Board{
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 935px;
+  margin: auto;
+  padding-bottom: 120px;
+
+  transform: perspective(804px) translate3d(0px, 0px, -213px) rotatex(15deg) scale(1.2) translateY(-65px);
+
+
+}
