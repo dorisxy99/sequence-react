@@ -12,7 +12,7 @@ const playerSchema = new Schema({
 
 
 const matchSchema = new Schema({
-  board: Object,
+  board: {type: Array, default: []},
   turn: String,
   status: String, //waiting, matched, ended
   deck: {type: Array, default: []},

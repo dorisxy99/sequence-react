@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 // import "./GamePage.scss";
 import cards from "../../data/cards";
-import {createMatch, getAllMatches, getMatch} from "../../utilities/match-api";
+import {createMatch, getAllMatches, getMatch, playCard, joinMatch} from "../../utilities/match-api";
 import Card from "../../components/Card/Card";
 import moment from "moment";
 import "./WaitingRoom.scss";
@@ -19,6 +19,20 @@ export default function WaitingRoom(props) {
     getMatches()
     }, [])
 
+    async function join(matchId){
+        console.log(matchId);
+        try{
+            let updatedMatch  = await joinMatch({
+                userId: props.user._id,
+                matchId: matchId
+            });
+            console.log(updatedMatch);
+
+        }catch (err){
+            alert(err.message)
+        }
+    }
+
 
     return (
         <main>
@@ -27,7 +41,9 @@ export default function WaitingRoom(props) {
                     <h1>{match.player_1.user.name}</h1>
                     <p>{match.status}</p>
                     <p>{moment(match.createdAt).fromNow()}</p>
-                    <a href={`/match/${match._id}`} className="btn">Join the game!</a>
+                    <a href={`/match/${match._id}`} className="btn"> Continue the game!</a>
+                    <a onClick={ () => join(match._id) } className="btn"> Join the game!</a>
+
                 </div>
             )}
         </main>

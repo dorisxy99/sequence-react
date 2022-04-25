@@ -6,6 +6,14 @@ export function createMatch(body) {
   return sendRequest(BASE_URL, 'POST', body);
 }
 
+export function joinMatch(body) {
+  return sendRequest(`${BASE_URL}/join`, 'POST', body);
+}
+
+export function playCard(body) {
+  return sendRequest(`${BASE_URL}/playcard`, 'POST', body);
+}
+
 export function getMatch(id) {
   return sendRequest(`${BASE_URL}/${id}`, 'GET');
 }

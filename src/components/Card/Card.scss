@@ -23,6 +23,15 @@
     border: 2px solid black;
     border-radius: 11px;
     padding: 12px 26px;
+    position: relative;
+
+    .chip{
+      position: absolute;
+      width: 100%;
+      opacity: .3;
+      right: 0;
+      top: 0
+    }
 
     h4{
       font-family: Cardova, serif;

@@ -1,7 +1,10 @@
 const express = require('express');
 const path = require('path');
+const http = require('http');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const socketIo = require('socket.io');
+const matchCtrl = require('./controllers/api/match');
 
 // Always require and configure near the top 
 require('dotenv').config();
@@ -9,6 +12,8 @@ require('dotenv').config();
 require('./config/database');
 
 const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
 
 // socket.io needs to connect to http server
 // const http = require('http').Server(app);
@@ -36,10 +41,34 @@ app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
+io.on("connection", (socket) => {
+    console.log("New player connected");
+
+    socket.on('join', (room) => {
+        console.log(`Player ${socket.id} joining ${room}`);
+        socket.join(room);
+    });
+
+    socket.on('playCard', async (req, callback) => {
+        console.log(req);
+        let match = await matchCtrl.playCard(req);
+        socket.to(req.matchId).emit('matchUpdated', match);
+        callback(match);
+    });
+
+    socket.on("disconnect", (data) => {
+        console.log("Client disconnected");
+    });
+
+    socket.on("connect_error", (err) => {
+        console.log(`connect_error due to ${err.message}`);
+    });
+});
+
 // Configure to use port 3001 instead of 3000 during
 // development to avoid collision with React's dev server
 const port = process.env.PORT || 3001;
 
-app.listen(port, function () {
+server.listen(port, function () {
     console.log(`Express app running on port ${port}`)
 });

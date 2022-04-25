@@ -2,15 +2,7 @@
   font-family: Cardova;
   src: url("../../assets/fonts/CARDOVA.ttf");
 }
-.App {
-  height: 100vh;
-  text-align: center;
-}
 
-.App-msg {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
+.btn{
+
 }
