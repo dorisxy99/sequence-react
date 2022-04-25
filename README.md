@@ -4,3 +4,5 @@
 3) [FRONTEND] Add the API request function in your frontend utilities
 4) [FRONTEND] Import the Utility into your page/component and call the function using onClick or other etc.
 5) [FRONTEND] Show what the chip looks like on the card
+
+

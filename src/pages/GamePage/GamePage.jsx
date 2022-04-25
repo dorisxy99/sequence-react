@@ -43,14 +43,14 @@ export default function GamePage(props) {
 
         return () => socket.disconnect();
 
-        // async function newMatch(){
-        //     const match = await createMatch({
-        //         test: "hello world",
-        //         userId: props.user._id
-        //     });
-        //     console.log(match);
-        // }
-       // newMatch()
+        async function newMatch(){
+            const match = await createMatch({
+                test: "hello world",
+                userId: props.user._id
+            });
+            console.log(match);
+        }
+       newMatch()
 
     }, [])
 
